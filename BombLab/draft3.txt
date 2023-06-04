@@ -1,0 +1,55 @@
+phase_3():
+	rsp -= 24;
+	rcx = rsp + 12;
+	rdx = rsp + 8; 
+	esi = (char*)0x4025cf;[%d %d]
+	eax = 0;
+	sscanf(input, esi);
+	if ((signed)1 <= eax) 
+		bomb;
+	if (*(rsp+8) - 7) > 0
+		bomb;
+	eax = *(rsp+8);
+	jmp rax*8 + 0x402470;
+	
+	eax = 207;
+	jmp <phase_3+123>;
+	
+	eax = 0x2c3;
+	jmp <phase_3+123>;
+	
+	eax = 0x100;
+	jmp <phase_3+123>;
+	
+	eax = 0x185;
+	jmp <phase_3+123>;
+	
+	eax = 0xce;
+	jmp <phase_3+123>;
+	
+	eax = 0x2aa;
+	jmp <phase_3+123>;
+	
+	eax = 0x147;
+	jmp <phase_3+123>;
+	
+	eax = 0;
+	jmp <phase_3+123>;
+	
+	eax = 0x137;
+	if *(rsp+12) == eax
+		defuse;
+	else 
+		bomb;
+
+Answer:	1 311
+	==> *(rsp+12) = 311
+	==> *(rsp+8) = 1
+
+困惑：
+	1. rcx和rdx的用处？
+		rdx是第三个参数，rcx是第四个
+	2. 为什么放在rsp+12和rsp+8？而不是rsp+0等等？
+	3. *号表示对操作数整体的解引用
+	4. cmp s1,s2 <==> s2-s1
+

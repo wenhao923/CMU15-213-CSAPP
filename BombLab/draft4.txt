@@ -1,0 +1,68 @@
+<phase_4>:
+	rsp = rsp - 24;
+	rcx = rsp + 12;
+	rdx = rsp + 8;
+	esi = 0x4025cf;
+	eax = 0;
+	sscanf(input, "%d %d", ,);
+	if (2 != eax)
+		bomb;
+	if (*(rsp+8) > (unsgined)12) rdx [0-12] 7 6
+		bomb;
+	rdx = 14;	// 第三个参数
+	rsi = 0;	// 第二个参数
+	rdi = *(rsp + 8);	// 第一个参数, 且
+	call func4();
+	if (rax != 0)
+		bomb;
+	if (0 != *(rsp+12))	// *(rsp+12) == 0
+		bomb;
+	rsp = rsp + 24;	
+
+Answer: 7 0
+
+<func4>:
+0		rsp = rsp - 8;			level0		level 1		level 2		level 3
++4		rax = rdx;			14		6		6
++6		rax = rax - rsi;		14		6		2
++8		rcx = rax;			14		6		2
++10		rcx = rcx >> 31;		0		0		0
++13		rax = rax + rcx;		14(1110)	6(0110)		8
++15		rax = rax >> 1;			7		3		4
++17		rcx = rax + rsi*1;		7		3		8
++20		if (rcx > (signed)rdi)				
++24			rdx = rcx - 1;		6		
++27			call func4(input, rsi, rdx);
++32			rax = rax * 2;
++34/+57			return;
++22/+36		rax = 0;
++41		if (rcx >= (signed)rdi)
++43/+57			return
+		else
++45			rsi = rcx + 1;				4
++48			call func4();					
++53			rax = rax + rax*1 + 1;
++57			return
+
+正数：	负数：
+0000		0001
+0111:7		1011:-5
+0111		1100
+0011:3		1110:-2		
+
+int func4(input, arg1, arg2) {
+	t = ((arg2-arg1) >> 31 + arg2-arg1) >> 1 + arg1;
+	int res = 0;
+	if (t > input) {
+		res = func4(input, arg1, t-1)*2;
+	}
+	if (t < input) {
+		res = func4(input, t+1, arg2)*2+1;
+	}
+	return res;
+}
+
+困惑：
+	1. (%rdi)涉及指针解引用, 如果前面是lea的话，则相当于用&取地址了即 &(*rdi) == rdi
+		
+		

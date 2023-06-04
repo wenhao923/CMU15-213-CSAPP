@@ -1,0 +1,51 @@
+phase_2():
+	把rbp压栈
+	把rbx压栈
+	分配0x28个字节
+	
+	rsi = rsp;
+	call read_six_numbers();
+	
+	if *(rsp) == 1
+		rbx = rsp+4;
+		rbp = rsp+18;
+		jmp <phase_2+27>;
+	else
+		bomb;
+
+  <phase_2+27>
+	rax = *(rbx-4);
+	rax *= 2;
+	if (rax != *rbx)
+		bomb;
+	rbx += 4;
+	if (rbp != rbx)
+		jmp <phase_2+27>
+	jmp <phase_2+64> // defuse
+	ret;
+
+Ansewer:1 2 4 8 16 32
+（格式保存在(char*) 0x4025c3中）
+
+<phase_2+25> 有什么用？
+注意0x表示16进制
+困惑：
+	1. (%rsi)读几个字节？
+		由指令后的字母决定, 或目标寄存器的大小
+	2. 输入的input，怎么在stack上保存？
+		每个int的地址或被保存到寄存器，或被保存在栈上？
+		如果sscanf函数指令已经生成的话
+	
+read_six_numbers():
+	rsp -= 24;
+	rdx = rsi;	// 上一个函数的栈指针
+	rcx = rsi + 4;	// 
+	rax = rsi + 20;
+	*(rsp+8) = rax;
+	rax = rsi + 16;
+	*rsp = rax;
+	r9 = rsi + 12;
+	r8 = rsi + 8;
+	rsi = 0x4025c3;
+	rax = 0;
+	
