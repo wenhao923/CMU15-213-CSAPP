@@ -7,7 +7,7 @@ phase_3():
 	sscanf(input, esi);
 	if ((signed)1 <= eax) 
 		bomb;
-	if (*(rsp+8) - 7) > 0
+	if ((unsigned)7 > *(rsp+8))
 		bomb;
 	eax = *(rsp+8);
 	jmp rax*8 + 0x402470;
@@ -51,5 +51,4 @@ Answer:	1 311
 		rdx是第三个参数，rcx是第四个
 	2. 为什么放在rsp+12和rsp+8？而不是rsp+0等等？
 	3. *号表示对操作数整体的解引用
-	4. cmp s1,s2 <==> s2-s1
 
