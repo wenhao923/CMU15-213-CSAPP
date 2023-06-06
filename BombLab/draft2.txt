@@ -48,4 +48,5 @@ read_six_numbers():
 	r8 = rsi + 8;
 	rsi = 0x4025c3;
 	rax = 0;
+	sscanf()
 	
