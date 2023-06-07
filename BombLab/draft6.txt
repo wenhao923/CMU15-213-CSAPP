@@ -34,7 +34,7 @@
 	
 
 <phase_6+95>:
-	rsi = *(rsp+24);
+	rsi = rsp+24;
 	rax = r14;
 	ecx = 7;
 <phase_6+108>:
@@ -62,7 +62,7 @@
 	if rsi == 24
 		jmp <phase_6+183>;
 <phase_6+163>:
-	ecx = *(rsp+rsi*1);
+	ecx = *(rsp+rsi);
 	if ecx <= (signed)1
 		jmp <phase_6+143>;
 	eax = 1;
