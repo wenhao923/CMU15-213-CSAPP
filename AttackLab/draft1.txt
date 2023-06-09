@@ -1,0 +1,10 @@
+<getbuf>:
+	rsp = rsp - 40;
+	rdi = rsp;
+	call Gets();
+	eax = 1;
+	rsp = rsp + 40;
+
+40 + 8
+
+Answer: 111111111111111111111111111111111111111
