@@ -1,0 +1,4 @@
+sub  $0x28, %rsp
+push 0x4018fa
+movq $0x5561dc78, %rdi
+ret
