@@ -1,0 +1,22 @@
+push touch2 
+mov cookie,%rdi
+return
+
+
+address:touch2
+addres(setval_426)
+COOKIE
+test返回地址 ---> address(pop %rdi;ret;)
+	getval_280: 58 90 c3 (popq %rax; ret;)
+	setval_426: 48 89 c7 (movq %rax,%rdi)
+	
+	
+总结：
+push $0xaaa：压到栈上
+popq %rsp： 出栈
+popq %rax： 出栈
+
+ret：mov %rsp,%rip; add $x,%rsp
+
+困惑：
+为什么不用保护环境？与我第一题相悖
